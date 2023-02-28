@@ -2,12 +2,12 @@ from random import uniform
 from time import perf_counter
 import matplotlib.pyplot as plt
 
+
 def main():
-    a = [round(uniform(0, 100), 4) for _ in range(10)]
-    text_info(a)
-    size = (10, 100, 1000)
+    size = (10, 100, 1000, 5000, 10000, 20000, 50000)
     for i in size:
-        ...
+        a = [round(uniform(0, 100), 4) for _ in range(i)]
+        text_info(a, i)
         plot_building(i, a)
 
 
@@ -18,12 +18,12 @@ def plot_building(size, a):
     x_axis = []
     y_axis = [[], [], []]
 
-    for i in range(1, size+1):
+    for i in range(1, size + 1):
         arr = gen_arr(i)
         x_axis.append(i)
-        y_axis[0].append(bubble_sort(arr[:])[1]+bubble_sort(arr[:])[2])
-        y_axis[1].append(bubble_sort(sorted(arr[:]))[1]+bubble_sort(sorted(arr[:]))[2])
-        y_axis[2].append(bubble_sort(sorted(arr[:], reverse=True))[1]+bubble_sort(sorted(arr[:], reverse=True))[2])
+        y_axis[0].append(bubble_sort(arr[:])[1] + bubble_sort(arr[:])[2])
+        y_axis[1].append(bubble_sort(sorted(arr[:]))[1] + bubble_sort(sorted(arr[:]))[2])
+        y_axis[2].append(bubble_sort(sorted(arr[:], reverse=True))[1] + bubble_sort(sorted(arr[:], reverse=True))[2])
 
     plt.plot(x_axis, y_axis[0], color='red')
     plt.plot(x_axis, y_axis[1], color='green')
@@ -40,12 +40,14 @@ def plot_building(size, a):
     x_axis = []
     y_axis = [[], [], []]
 
-    for i in range(1, size+1):
+    for i in range(1, size + 1):
         arr = gen_arr(i)
         x_axis.append(i)
-        y_axis[0].append(upgraded_bubble_sort(arr[:])[1]+upgraded_bubble_sort(arr[:])[2])
-        y_axis[1].append(upgraded_bubble_sort(sorted(arr[:]))[1]+upgraded_bubble_sort(sorted(arr[:]))[2])
-        y_axis[2].append(upgraded_bubble_sort(sorted(arr[:], reverse=True))[1]+upgraded_bubble_sort(sorted(arr[:], reverse=True))[2])
+        y_axis[0].append(upgraded_bubble_sort(arr[:])[1] + upgraded_bubble_sort(arr[:])[2])
+        y_axis[1].append(upgraded_bubble_sort(sorted(arr[:]))[1] + upgraded_bubble_sort(sorted(arr[:]))[2])
+        y_axis[2].append(
+            upgraded_bubble_sort(sorted(arr[:], reverse=True))[1] + upgraded_bubble_sort(sorted(arr[:], reverse=True))[
+                2])
 
     plt.plot(x_axis, y_axis[0], color='red')
     plt.plot(x_axis, y_axis[1], color='green')
@@ -62,12 +64,13 @@ def plot_building(size, a):
     x_axis = []
     y_axis = [[], [], []]
 
-    for i in range(1, size+1):
+    for i in range(1, size + 1):
         arr = gen_arr(i)
         x_axis.append(i)
-        y_axis[0].append(insertion_sort(arr[:])[1]+insertion_sort(arr[:])[2])
-        y_axis[1].append(insertion_sort(sorted(arr[:]))[1]+insertion_sort(sorted(arr[:]))[2])
-        y_axis[2].append(insertion_sort(sorted(arr[:], reverse=True))[1]+insertion_sort(sorted(arr[:], reverse=True))[2])
+        y_axis[0].append(insertion_sort(arr[:])[1] + insertion_sort(arr[:])[2])
+        y_axis[1].append(insertion_sort(sorted(arr[:]))[1] + insertion_sort(sorted(arr[:]))[2])
+        y_axis[2].append(
+            insertion_sort(sorted(arr[:], reverse=True))[1] + insertion_sort(sorted(arr[:], reverse=True))[2])
 
     plt.plot(x_axis, y_axis[0], color='red')
     plt.plot(x_axis, y_axis[1], color='green')
@@ -77,23 +80,24 @@ def plot_building(size, a):
     plt.legend(("randomized", "sorted", "reversed", "best variant", "worst variant"))
     plt.show()
 
-def text_info(a):
-    print("Random generated array: \n", a)
-    start = perf_counter()
-    print("Sorted array: ")
-    print(bubble_sort(a[:])[0], end='\n\n')
 
-    print(f"Sorted time for Bubble function on random array: \n{perf_counter()-start} sec")
+def text_info(a, i):
+    print(f"Random generated array FOR LEN {i}: \n", a, i)
+    # print("Sorted array: ")
+    # print(bubble_sort(a[:])[0], end='\n\n')
+
+    start = perf_counter()
+    print(f"Sorted time for Bubble function on random array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", bubble_sort(a[:])[1])
     print("Number of permutation: ", bubble_sort(a[:])[2], end='\n\n')
     start = perf_counter()
     # print(bubble_sort(sorted(a[:]))[0])
-    print(f"Sorted time for Bubble function on full-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Bubble function on full-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", bubble_sort(sorted(a[:]))[1])
     print("Number of permutation: ", bubble_sort(sorted(a[:]))[2], end='\n\n')
     start = perf_counter()
     # print(bubble_sort(sorted(a[:], reverse=True))[0])
-    print(f"Sorted time for Bubble function on reversed-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Bubble function on reversed-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", bubble_sort(sorted(a[:], reverse=True))[1])
     print("Number of permutation: ", bubble_sort(sorted(a[:], reverse=True))[2], end='\n\n')
 
@@ -101,17 +105,17 @@ def text_info(a):
 
     start = perf_counter()
     # print(upgraded_bubble_sort(a[:]))
-    print(f"Sorted time for Upgraded Bubble function on random array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Upgraded Bubble function on random array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", upgraded_bubble_sort(a[:])[1])
     print("Number of permutation: ", upgraded_bubble_sort(a[:])[2], end='\n\n')
     start = perf_counter()
     # print(upgraded_bubble_sort(sorted(a[:]))[0])
-    print(f"Sorted time for Upagraded Bubble sort function on full-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Upagraded Bubble sort function on full-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", upgraded_bubble_sort(sorted(a[:]))[1])
     print("Number of permutation: ", upgraded_bubble_sort(sorted(a[:]))[2], end='\n\n')
     start = perf_counter()
     # print(upgraded_bubble_sort(sorted(a[:], reverse=True))[0])
-    print(f"Sorted time for Upgraded Bubble sort function on reversed-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Upgraded Bubble sort function on reversed-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", upgraded_bubble_sort(sorted(a[:], reverse=True))[1])
     print("Number of permutation: ", upgraded_bubble_sort(sorted(a[:], reverse=True))[2], end='\n\n')
 
@@ -119,17 +123,17 @@ def text_info(a):
 
     start = perf_counter()
     # print(insertion_sort(a[:]))
-    print(f"Sorted time for Insertion sort function on random array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Insertion sort function on random array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", insertion_sort(a[:])[1])
     print("Number of permutation: ", insertion_sort(a[:])[2], end='\n\n')
     start = perf_counter()
     # print(insertion_sort(sorted(a[:]))[0])
-    print(f"Sorted time for Insertion sort function on full-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Insertion sort function on full-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", insertion_sort(sorted(a[:]))[1])
     print("Number of permutation: ", insertion_sort(sorted(a[:]))[2], end='\n\n')
     start = perf_counter()
     # print(insertion_sort(sorted(a[:], reverse=True))[0])
-    print(f"Sorted time for Insertion sort function on reversed-sorted array: \n{perf_counter()-start} sec")
+    print(f"Sorted time for Insertion sort function on reversed-sorted array: \n{perf_counter() - start} sec")
     print("Number of comprasion: ", insertion_sort(sorted(a[:], reverse=True))[1])
     print("Number of permutation: ", insertion_sort(sorted(a[:], reverse=True))[2], end='\n\n')
 
@@ -182,8 +186,7 @@ def insertion_sort(array):
         key = array[i]
 
         j = i - 1
-        while j >= 0 and key < array[j]:
-            number_of_comparison += 1
+        while j >= 0 and (number_of_comparison := number_of_comparison + 1) and key < array[j]:
             array[j + 1] = array[j]
             number_of_permutation += 1
             j -= 1
