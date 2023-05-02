@@ -46,8 +46,8 @@ def create_adjacency_list(matrix: list) -> dict:
 dictionary1 = create_adjacency_list(matrix1)
 dictionary2 = create_adjacency_list(matrix2)
 # --- incident matrix ---
-# for x in dictionary:
-#     print(x, ":", dictionary.get(x))
+for x in dictionary1:
+    print(x, ":", dictionary1.get(x))
 
 # init of Graph class object
 graph1 = nx.Graph()
@@ -85,7 +85,7 @@ def wave_distance(dictionary: dict, start: str, end: str):
         for neighbor in dictionary[node]:
             queue.append((neighbor, dist + 1))
 
-    return "inf"  # if end node is not found, return -1
+    return -1  # if end node is not found, return -1
 
 visited = []
 for start_point in dictionary1.keys():
